@@ -1,0 +1,76 @@
+
+# Connect device to PC:
+adb connect IP_address
+
+
+# Show connected devices:
+adb devices
+
+
+# Work with terminal:
+adb shell
+
+
+# Show installed applications:
+pm list packages -f | grep -i "launcher"
+
+
+# Clear application data. Notes: clearing app data, cache: 
+adb shell pm clear PACKAGE_NAME
+
+# Example
+adb shell pm clear com.android.launcher
+
+
+# dumpsys
+## dumpsys is an android tool that runs on the device and dumps interesting information about the status of system services.
+
+Obvious benefits:
+
+Possibility to easily get system information in a simple string representation.
+Possibility to use dumped CPU, RAM, Battery, storage stats for a pretty charts, which will allow you to check how your application affects the overall device!
+
+# Get application version name using adb:
+adb shell dumpsys package PACKAGE_NAME | grep versionName
+
+
+# Removes a package from the emulator/device:
+adb uninstall [options] <PACKAGE_NAME>
+
+# Example
+adb uninstall com.test.app
+
+adb uninstall -k com.test.app 
+
+Notes: -k - keep the data and cache directories around after package removal.
+
+
+# To get Android OS version of device connected via adb:
+adb shell getprop ro.build.version.release
+
+
+# To get API level of device connected via adb:
+adb shell getprop ro.build.version.sdk 
+
+
+# You can see all available properties with this command:
+adb shell getprop
+
+
+# To show MAC address
+adb shell "netcfg" (deprecated, use ip link show or ifconfig instead)
+
+# Output by using "netcfg"
+$ adb shell netcfg
+sit0     DOWN                                   0.0.0.0/0   0x00000080 
+eth0     UP                                  10.0.3.202/23  0x00001043 
+lo       UP                                   127.0.0.1/8   0x00000049 
+wlan0    UP                                     0.0.0.0/0   0x00001003 
+tunl0    DOWN                                   0.0.0.0/0   0x00000080 
+dummy0   DOWN                                   0.0.0.0/0   0x00000082 
+ip6tnl0  DOWN                                   0.0.0.0/0   0x00000080 
+
+# Output by using ip address show
+adb shell ip address show wlan0 | grep "00:"
+    link/ether 00:04:4b:b1:a1:d2 brd ff:ff:ff:ff:ff:ff
+
