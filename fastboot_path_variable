@@ -1,0 +1,6 @@
+# Replace the path with what you need. It useful if you need the latest version of fastboot.
+
+export fastboot=~/Downloads/Android/sdk/platform-tools/fastboot
+echo $fastboot
+
+echo $fastboot devices
